@@ -1,0 +1,9 @@
+﻿@model List<Category>
+    <ul class="list-unstyled mb-0">
+        @foreach (var cat in Model)
+        {
+            <li>
+                <a href="#">@cat.CategoryName</a>
+            </li>
+        }
+    </ul>
