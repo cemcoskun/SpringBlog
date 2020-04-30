@@ -16,6 +16,7 @@ namespace SpringBlog.Models
             // authenticationType özelliğinin CookieAuthenticationOptions.AuthenticationType içinde tanımlanmış olanla eşleşmesi gerektiğini unutmayın
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Özel kullanıcı taleplerini buraya ekle
+            userIdentity.AddClaim(new Claim("DisplayName", DisplayName));
             return userIdentity;
         }
 

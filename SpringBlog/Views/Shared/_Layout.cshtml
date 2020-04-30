@@ -23,7 +23,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">SpringBlog</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -36,6 +37,9 @@
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Administration", "Index", "Dashboard", new { area = "Admin" }, new { @class = "nav-link" })
                     </li>
                 </ul>
             </div>
@@ -74,7 +78,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                @Html.Action("CategoriesPartial", "Home")
+                                @Html.Action("CategoriesPartial", "Home", new { area = "" })
                             </div>
                             
                         </div>
@@ -105,7 +109,6 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     @Scripts.Render("~/bundle/jquery")
     @Scripts.Render("~/bundle/bootstrap")
     @RenderSection("scripts", false)

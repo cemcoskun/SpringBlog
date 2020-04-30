@@ -5,6 +5,7 @@
 
         <h1 class="my-4">
             My Blog Posts
+            @Html.ActionLink("Yönetim", "Index", "Dashboard", new { area = "Admin" }, null)
         </h1>
 
 @foreach (var post in Model.Posts)
@@ -15,7 +16,7 @@
             <div class="card-body">
                 <h2 class="card-title">@post.Title</h2>
                 @Html.Raw(post.Content)
-                <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                <a href="@Url.Action("Show", "Post", new { slug = post.Slug })" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
                 Posted on @post.CreationTime.Value.ToShortDateString() by
