@@ -28,8 +28,7 @@ namespace SpringBlog.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("ApplicationDbContext", throwIfV1Schema: false)
+        public ApplicationDbContext() : base("ApplicationDbContext", throwIfV1Schema: false)
         {
         }
 

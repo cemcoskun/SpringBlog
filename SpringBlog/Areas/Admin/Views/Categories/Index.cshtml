@@ -23,7 +23,15 @@
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.CategoryName</td>
-                        <td>Edit | Delete</td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-info">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger" data-delete-id="@item.Id" 
+                               data-delete-name="@item.CategoryName" 
+                               data-delete-action="@Url.Action("Delete")">
+                            <i class="fas fa-trash" ></i></a>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -32,3 +40,5 @@
     <!-- /.card-body -->
 </div>
 <!-- /.card -->
+
+@Html.Partial("_DeleteModalPartial")

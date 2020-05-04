@@ -3,5 +3,8 @@
     ViewBag.Title = "Show";
 }
 
-    <h1 class="mt-3">@Model.Title</h1>
-@Html.Raw(Model.Content)
+<h1 class="mt-3">@Model.Title</h1>
+
+<div class="show-post">
+    @Html.Raw(Model.Content)
+</div>

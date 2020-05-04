@@ -1,0 +1,37 @@
+﻿@model Category
+@{
+    ViewBag.Title = "Edit Category";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Edit Category: @Model.CategoryName</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                @using (Html.BeginForm("Edit", "Categories", FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="card-body">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.CategoryName)
+                            @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control", placeholder = "Category Name" })
+                            @Html.ValidationMessageFor(x => x.CategoryName, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                }
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</div>
+

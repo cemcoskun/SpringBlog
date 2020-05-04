@@ -31,13 +31,23 @@
                 @Html.TextAreaFor(x => x.Content, new { @class = "form-control", data_snote = "true" })
                 @Html.ValidationMessageFor(x => x.Content, null, new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <div class="btn btn-default btn-file">
-                    <i class="fas fa-paperclip"></i> Attachment
-                    <input type="file" name="attachment">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <div class="btn btn-default btn-file">
+                            <i class="fas fa-paperclip"></i> Attachment
+                            <input type="file" name="attachment">
+                        </div>
+                        <p class="help-block">Max. 32MB</p>
+                    </div>
                 </div>
-                <p class="help-block">Max. 32MB</p>
+                <div class="col-md-6 form-inline align-content-start">
+                        @Html.LabelFor(x => x.Title)
+                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control ml-2 flex-fill", placeholder = "Short URL" })
+                        @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+                </div>
             </div>
+
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
