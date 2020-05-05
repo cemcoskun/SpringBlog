@@ -38,14 +38,29 @@
                     <li class="nav-item">
                         @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
                     </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+
+                <ul class="navbar-nav">
                     @if (User.IsInRole("admin"))
                     {
-                        <li class="nav-item">
+                        <li class="nav-item d-lg-none">
                             @Html.ActionLink("Administration", "Index", "Dashboard", new { area = "Admin" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item dropdown d-none d-lg-block ml-3">
+                            <div class="btn-group">
+                                @Html.ActionLink("Administration", "Index", "Dashboard", new { area = "Admin" }, new { @class = "btn btn-secondary" })
+                                <a href="#" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </a>
+                                <div class="dropdown-menu">
+                                    @Html.ActionLink("Categories", "Index", "Categories", new { area = "Admin" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Posts", "Index", "Posts", new { area = "Admin" }, new { @class = "dropdown-item" })
+                                </div>
+                            </div>
                         </li>
                     }
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
@@ -113,8 +128,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    @Scripts.Render("~/bundle/jquery")
-    @Scripts.Render("~/bundle/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", false)
 </body>
 

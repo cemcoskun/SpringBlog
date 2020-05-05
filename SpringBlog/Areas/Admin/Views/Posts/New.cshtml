@@ -3,7 +3,7 @@
     ViewBag.Title = "New Post";
 }
 
-@using (Html.BeginForm("New", "Posts", FormMethod.Post))
+@using (Html.BeginForm("New", "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -32,33 +32,59 @@
                 @Html.ValidationMessageFor(x => x.Content, null, new { @class = "text-danger" })
             </div>
             <div class="row">
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <div class="btn btn-default btn-file">
-                            <i class="fas fa-paperclip"></i> Attachment
-                            <input type="file" name="attachment">
+                <div class="col-md-6 form-inline my-1">
+                    <label for="exampleInputFile">Featured Image</label>
+                    <div class="input-group flex-fill ml-2">
+                        <div class="custom-file">
+                            <input type="file" name="FeaturedImage" class="custom-file-input" id="exampleInputFile">
+                            <label class="custom-file-label justify-content-start" for="exampleInputFile">Choose file</label>
                         </div>
-                        <p class="help-block">Max. 32MB</p>
                     </div>
+                            @Html.ValidationMessage("FeaturedImage", null, new { @class = "text-danger ml-2" })
                 </div>
-                <div class="col-md-6 form-inline align-content-start">
-                        @Html.LabelFor(x => x.Title)
-                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control ml-2 flex-fill", placeholder = "Short URL" })
-                        @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+                <div class="col-md-6 form-inline align-content-start my-1">
+                    @Html.LabelFor(x => x.Slug)
+                    @Html.TextBoxFor(x => x.Slug, new { @class = "form-control flex-fill ml-2", placeholder = "a-sample-url" })
+                    <a id="refreshSlug" href="#" class="mx-1 text-secondary"><i class="fas fa-sync-alt"></i></a>
+                    @Html.ValidationMessageFor(x => x.Slug, null, new { @class = "text-danger" })
                 </div>
             </div>
 
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <div class="float-right">
-                <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
-                <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+            <div class="float-left">
+                <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Add</button>
             </div>
-            <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
         </div>
         <!-- /.card-footer -->
     </div>
     <!-- /.card -->
 }
 
+@section scripts {
+    <script>
+        $(function () {
+            $("#Title").change(function () {
+                if (!$("#Slug").val()) {
+                    generateSlug();
+                    }
+            });
+
+            $("#refreshSlug").click(function (event) {
+                event.preventDefault();
+                generateSlug();
+            });
+
+            function generateSlug() {
+                var title = $("#Title").val();
+                if (!title) return;
+
+                $.post("@Url.Action("ConvertToSlug")", { title: title }, function (data) {
+                    $("#Slug").val(data);
+                });
+            }
+        });
+    </script>
+}
