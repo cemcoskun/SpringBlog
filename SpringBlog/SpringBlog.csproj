@@ -2094,6 +2094,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <None Include="Upload\.gitignore" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2148,7 +2149,6 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\AdminBase\" />
     <Folder Include="Images\" />
-    <Folder Include="Upload\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

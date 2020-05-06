@@ -36,8 +36,8 @@
                     <label for="exampleInputFile">Featured Image</label>
                     <div class="input-group flex-fill ml-2">
                         <div class="custom-file">
-                            <input type="file" name="FeaturedImage" class="custom-file-input" id="exampleInputFile">
                             <label class="custom-file-label justify-content-start" for="exampleInputFile">Choose file</label>
+                            <input type="file" name="FeaturedImage" class="custom-file-input" id="exampleInputFile">
                         </div>
                     </div>
                             @Html.ValidationMessage("FeaturedImage", null, new { @class = "text-danger ml-2" })
@@ -83,6 +83,7 @@
 
                 $.post("@Url.Action("ConvertToSlug")", { title: title }, function (data) {
                     $("#Slug").val(data);
+                    $("#Slug").trigger("blur");
                 });
             }
         });

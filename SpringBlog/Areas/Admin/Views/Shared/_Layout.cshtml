@@ -282,6 +282,9 @@
     <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="~/Areas/Admin/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery Validation -->
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/Areas/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables -->
@@ -304,7 +307,7 @@
 
 
     @RenderSection("scripts", false)
-<script>
+    <script>
     @if (TempData["SuccessMessage"] != null)
     {
         <text>
@@ -317,6 +320,6 @@
     toastr.error('@TempData["ErrorMessage"]');
         </text>
     }
-</script>
+    </script>
 </body>
 </html>
