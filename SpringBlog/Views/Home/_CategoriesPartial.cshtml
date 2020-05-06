@@ -1,9 +1,14 @@
 ﻿@model List<Category>
-    <ul class="list-unstyled mb-0">
-        @foreach (var cat in Model)
-        {
-            <li>
-                <a href="#">@cat.CategoryName</a>
-            </li>
-        }
-    </ul>
+<ul class="list-unstyled mb-0">
+    <li>
+        @Html.ActionLink("All Posts", "Index", "Home")
+    </li>
+    @foreach (var cat in Model)
+    {
+        <li>
+            <a href="@Url.Action("Index", "Home", new { cid = cat.Id })">
+                @cat.CategoryName
+            </a>
+        </li>
+    }
+</ul>

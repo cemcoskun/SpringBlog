@@ -1,0 +1,16 @@
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var actionName = this.ViewContext.RouteData.Values["action"].ToString();
+}
+
+<ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item">
+    @Html.ActionLink("Admisintration", "Index", "Dashboard")
+    </li>
+    <li class="breadcrumb-item">
+    @Html.ActionLink(controllerName, "Index", controllerName)
+    </li>
+    <li class="breadcrumb-item active">
+    @actionName
+    </li>
+</ol>

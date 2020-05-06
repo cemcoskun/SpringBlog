@@ -6,5 +6,9 @@
 <h1 class="mt-1">@Model.Title</h1>
 
 <div class="show-post">
+    @if (!string.IsNullOrEmpty(Model.PhotoPath))
+    {
+        <img src="@Url.FeaturedImage(Model.PhotoPath)" alt="Post Featured Image" />
+    }
     @Html.Raw(Model.Content)
 </div>

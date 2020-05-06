@@ -4,9 +4,22 @@
 }
 
 <h1>
-    My Blog Posts
-    @Html.ActionLink("Yönetim", "Index", "Dashboard", new { area = "Admin" }, null)
+    @if (Model.SearchTerm != null)
+    {
+        <text>
+            Search Results for &quot;@Model.SearchTerm &quot;
+        </text>
+    }
+    else
+    {
+        @(Model.Category == null ? "My Blog Posts" : $"Posts in \" { Model.Category.CategoryName}")
+        @Html.ActionLink("Yönetim", "Index", "Dashboard", new { area = "Admin" }, null)
+    }
 </h1>
+@if (Model.Posts.Any() && Model.SearchTerm != null)
+{
+    <p>No results found!</p>
+}
 
 @foreach (var post in Model.Posts)
 {
@@ -32,7 +45,7 @@
 }
 
 <!-- Pagination -->
-<ul class="pagination justify-content-center mb-4">
+<ul class="pagination justify-content-center mb-4 mt-auto">
     <li class="page-item">
         <a class="page-link" href="#">&larr; Older</a>
     </li>

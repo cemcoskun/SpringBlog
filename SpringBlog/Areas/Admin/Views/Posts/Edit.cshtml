@@ -1,0 +1,114 @@
+﻿@model EditPostViewModel
+@{
+    ViewBag.Title = "Edit Post";
+}
+
+@using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.CurrentFeaturedImage)
+    @Html.HiddenFor(x => x.CreationTime)
+    @Html.HiddenFor(x => x.ModificationTime)
+
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Edit the Post</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control", placeholder = "Title:" })
+                        @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.DropDownListFor(x => x.CategoryId, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.TextAreaFor(x => x.Content, new { @class = "form-control", data_snote = "true" })
+                @Html.ValidationMessageFor(x => x.Content, null, new { @class = "text-danger" })
+                <div class="small text-right">
+                    @Html.LabelFor(x => x.CreationTime)
+                    @Html.DisplayFor(x => x.CreationTime)
+
+                    @Html.LabelFor(x => x.ModificationTime, new { @class = "ml-1" })
+                    @Html.DisplayFor(x => x.ModificationTime)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-inline my-1">
+                    <label for="exampleInputFile">Featured Image</label>
+                    <div class="input-group flex-fill ml-2">
+                        <div class="custom-file">
+                            <label class="custom-file-label justify-content-start" for="exampleInputFile">
+                                @(string.IsNullOrEmpty(Model.CurrentFeaturedImage) ? "Choose file" : Model.CurrentFeaturedImage)
+                            </label>                            
+                            <input type="file" name="FeaturedImage" class="custom-file-input" id="exampleInputFile">
+                        </div>
+                    </div>
+                    @Html.ValidationMessage("FeaturedImage", null, new { @class = "text-danger ml-2" })
+                </div>
+                <div class="col-md-6 form-inline align-content-start my-1">
+                    @Html.LabelFor(x => x.Slug)
+                    @Html.TextBoxFor(x => x.Slug, new { @class = "form-control flex-fill ml-2", placeholder = "a-sample-url" })
+                    <a id="refreshSlug" href="#" class="mx-1 text-secondary"><i class="fas fa-sync-alt"></i></a>
+                    @Html.ValidationMessageFor(x => x.Slug, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="small">
+                @Html.LabelFor(x => x.CreationTime)
+                @Html.DisplayFor(x => x.CreationTime)
+
+                @Html.LabelFor(x => x.ModificationTime, new { @class = "ml-1" })
+                @Html.DisplayFor(x => x.ModificationTime)
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <div class="float-left">
+                <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save and Publish</button>
+            </div>
+        </div>
+        <!-- /.card-footer -->
+    </div>
+    <!-- /.card -->
+}
+
+@section scripts {
+    <script>
+        $(function () {
+            var currentFeaturedImage = $("#CurrentFeaturedImage").val();
+            if ($("#CurrentFeaturedImage").val()) {
+                $("#currentFeaturedImageLabel").text(currentFeaturedImage);
+            }
+            $("#Title").change(function () {
+                if (!$("#Slug").val()) {
+                    generateSlug();
+                    }
+            });
+
+            $("#refreshSlug").click(function (event) {
+                event.preventDefault();
+                generateSlug();
+            });
+
+            function generateSlug() {
+                var title = $("#Title").val();
+                if (!title) return;
+
+                $.post("@Url.Action("ConvertToSlug")", { title: title }, function (data) {
+                    $("#Slug").val(data);
+                    $("#Slug").trigger("blur");
+                });
+            }
+        });
+    </script>
+}
