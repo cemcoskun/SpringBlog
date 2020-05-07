@@ -1,4 +1,5 @@
-﻿using SpringBlog.Models;
+﻿using X.PagedList;
+using SpringBlog.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,10 @@ namespace SpringBlog.ViewModel
 {
     public class HomeIndexViewModel
     {
-        public List<Post> Posts { get; set; }
+        public IPagedList<Post> Posts { get; set; }
         public Category Category { get; set; }
         public string SearchTerm { get; set; }
+        public int? CategoryId { get; set; }
 
     }
 }
