@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     @Styles.Render("~/Content/bootstrap")
+    <link href="~/Content/croppie.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
     @Styles.Render("~/Content/css")
 </head>
@@ -84,12 +85,12 @@
                     <div class="card-body">
                         @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { id = "frmSearch" }))
                         {
-                        <div class="input-group">
-                            @Html.TextBox("q", null, new { @class = "form-control", placeholder = "Search for..." })
-                            <span class="input-group-append">
-                                <button class="btn btn-secondary" type="submit">Go!</button>
-                            </span>
-                        </div>
+                            <div class="input-group">
+                                @Html.TextBox("q", null, new { @class = "form-control", placeholder = "Search for..." })
+                                <span class="input-group-append">
+                                    <button class="btn btn-secondary" type="submit">Go!</button>
+                                </span>
+                            </div>
                         }
                     </div>
                 </div>
@@ -133,7 +134,9 @@
     <!-- Bootstrap core JavaScript -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-<script src="~/Scripts/Site.js"></script>
+    <script src="~/Areas/Admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="~/Scripts/croppie.min.js"></script>
+    <script src="~/Scripts/Site.js"></script>
     @RenderSection("scripts", false)
 </body>
 

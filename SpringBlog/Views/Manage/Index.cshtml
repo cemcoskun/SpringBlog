@@ -9,6 +9,14 @@
 <div>
     <h4>Hesap ayarlarınızı değiştirin</h4>
     <hr />
+
+    <div class="manage-profile-photo-container float-right text-center">
+        <a href="#" data-toggle="modal" data-target="#modalChangePhoto">
+            <img id="profilePhoto" src="@Url.LoggedInProfilePhoto()" width="100" alt="profile photo" /><br>
+            Update Photo
+        </a>
+    </div>
+
     <dl class="dl-horizontal">
         <dt>Parola:</dt>
         <dd>
@@ -30,13 +38,13 @@
         </dd>
         @*
             Telefon Numaraları, iki öğeli kimlik doğrulama sisteminde ikinci öğe olarak kullanılabilir.
-             
+
              Bu ASP.NET uygulamasını SMS kullanarak iki öğeli kimlik doğrulamayı destekleyecek şekilde
                         ayarlama konusunda ayrıntılı bilgi için <a href="https://go.microsoft.com/fwlink/?LinkId=403804">bu makaleye</a> bakın.
-             
+
              İki öğeli kimlik doğrulamayı ayarladıktan sonra aşağıdaki blokları açıklama durumundan çıkarın
         *@
-        @*  
+        @*
             <dt>Telefon Numarası:</dt>
             <dd>
                 @(Model.PhoneNumber ?? "Yok")
@@ -85,3 +93,81 @@
         </dd>
     </dl>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalChangePhoto" tabindex="-1" role="dialog" aria-labelledby="modalChangePhotoTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalChangePhotoTitle">Choose a Profile Photo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="file-input">
+                    <label class="custom-file-label" for="customFile" data-browse="Browse">Choose file</label>
+                </div>
+
+                <div class="cropper-wrapper">
+                    <div class="cropper">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="btnUpload" type="button" class="btn btn-primary">Crop and Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var cropper = null;
+
+        $("#file-input").change(function () {
+            readFile(this);
+        });
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    if (cropper == null)
+                        cropper = $('.cropper').croppie();
+
+                    cropper.croppie('bind', {
+                        url: e.target.result
+                    });
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#modalChangePhoto').on('hidden.bs.modal', function (e) {
+            $("#file-input").val(null);
+            $(".custom-file-label").text("Choose file");
+            if (cropper) {
+                cropper.croppie('destroy');
+                cropper = null;
+            }
+        });
+
+        $("#btnUpload").click(function () {
+
+            cropper.croppie('result', {
+                type: "base64",
+                size: { width: 400, height: 400 }
+            }).then(function (base64) {
+                $("#profilePhoto").attr('src', base64);
+            });
+
+        });
+    </script>
+}

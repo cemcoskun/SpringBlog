@@ -163,10 +163,10 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="~/Areas/Admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="@Url.LoggedInProfilePhoto()" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@User.Identity.DisplayName()</a>
+                        <a href="@Url.Action("Index","Manage", new { area = "" })" class="d-block">@User.Identity.DisplayName()</a>
                     </div>
                 </div>
 
@@ -267,7 +267,6 @@
     <script src="~/Areas/Admin/dist/js/demo.js"></script>
     <!-- Summernote -->
     <script src="~/Areas/Admin/plugins/summernote/summernote-bs4.min.js"></script>
-
 
     <script src="~/Areas/Admin/dist/js/admin.custom.js"></script>
     @RenderSection("scripts", false)

@@ -207,6 +207,10 @@
     <Compile Include="Migrations\202004291623566_Initial.Designer.cs">
       <DependentUpon>202004291623566_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005071611465_ProfilePhoto.cs" />
+    <Compile Include="Migrations\202005071611465_ProfilePhoto.Designer.cs">
+      <DependentUpon>202005071611465_ProfilePhoto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -1902,13 +1906,16 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\croppie.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\profile.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\croppie.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -2164,7 +2171,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\AdminBase\" />
-    <Folder Include="Images\" />
+    <Folder Include="Upload\Profiles\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
@@ -2271,6 +2278,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202004291623566_Initial.resx">
       <DependentUpon>202004291623566_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005071611465_ProfilePhoto.resx">
+      <DependentUpon>202005071611465_ProfilePhoto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
