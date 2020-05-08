@@ -119,7 +119,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button id="btnUpload" type="button" class="btn btn-primary">Crop and Upload</button>
+                <button id="btnUpload" disabled type="button" class="btn btn-primary">Crop and Upload</button>
             </div>
         </div>
     </div>
@@ -131,6 +131,17 @@
 
         $("#file-input").change(function () {
             readFile(this);
+
+            if (this.files && this.files[0]) {
+                $("#btnUpload").removeAttr("disabled");
+            }
+            else {
+                $("#btnUpload").attr("disabled", "disabled");
+                if (cropper) {
+                    cropper.croppie('destroy');
+                    cropper = null;
+                }
+            }
         });
 
         function readFile(input) {
@@ -138,7 +149,7 @@
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    if (cropper == null)
+                    if(cropper == null)
                         cropper = $('.cropper').croppie();
 
                     cropper.croppie('bind', {
@@ -153,6 +164,8 @@
         $('#modalChangePhoto').on('hidden.bs.modal', function (e) {
             $("#file-input").val(null);
             $(".custom-file-label").text("Choose file");
+            $("#btnUpload").attr("disabled", "disabled");
+
             if (cropper) {
                 cropper.croppie('destroy');
                 cropper = null;
@@ -161,11 +174,19 @@
 
         $("#btnUpload").click(function () {
 
+            if (!cropper) {
+                return;
+            }
+
             cropper.croppie('result', {
                 type: "base64",
                 size: { width: 400, height: 400 }
             }).then(function (base64) {
-                $("#profilePhoto").attr('src', base64);
+                $.post("@Url.Action("UploadProfilePhoto")", { photoBase64: base64 }, function (data) {
+                    $("#profilePhoto").attr('src', data.photoUrl);
+                    $("#modalChangePhoto").modal('hide');
+                })
+
             });
 
         });
