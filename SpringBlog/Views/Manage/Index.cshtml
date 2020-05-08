@@ -10,11 +10,20 @@
     <h4>Hesap ayarlarınızı değiştirin</h4>
     <hr />
 
-    <div class="manage-profile-photo-container float-right text-center">
-        <a href="#" data-toggle="modal" data-target="#modalChangePhoto">
-            <img id="profilePhoto" src="@Url.LoggedInProfilePhoto()" width="100" alt="profile photo" /><br>
-            Update Photo
-        </a>
+    <div class="float-right position-relative">
+
+        <div class="dropdown mt-1 position-absolute" style="bottom: 3px; right: 3px;">
+            <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item small" href="#" data-toggle="modal" data-target="#modalChangePhoto">Change Photo</a>
+                <a class="dropdown-item small" href="#" id="btnDeletePhoto">Delete</a>
+            </div>
+        </div>
+
+        <img id="profilePhoto" class="rounded" src="@Url.LoggedInProfilePhoto()" alt="profile photo" width="150" /> <br />
+
     </div>
 
     <dl class="dl-horizontal">
@@ -189,6 +198,12 @@
 
             });
 
+        });
+        $("#btnDeletePhoto").click(function () {
+            $.post("@Url.Action("DeleteProfilePhoto")", function (data) {
+                    $("#profilePhoto").attr('src', data.photoUrl);
+
+            });
         });
     </script>
 }
