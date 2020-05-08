@@ -187,6 +187,7 @@
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SlugController.cs" />
     <Compile Include="Areas\Admin\ViewModels\DashboardViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\EditPostViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\NewPostViewModel.cs" />
@@ -203,13 +204,9 @@
     <Compile Include="Helpers\ImageUtilities.cs" />
     <Compile Include="Helpers\PostedImageAttribute.cs" />
     <Compile Include="Helpers\UrlService.cs" />
-    <Compile Include="Migrations\202004291623566_Initial.cs" />
-    <Compile Include="Migrations\202004291623566_Initial.Designer.cs">
-      <DependentUpon>202004291623566_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005071611465_ProfilePhoto.cs" />
-    <Compile Include="Migrations\202005071611465_ProfilePhoto.Designer.cs">
-      <DependentUpon>202005071611465_ProfilePhoto.cs</DependentUpon>
+    <Compile Include="Migrations\202005081547064_Initial.cs" />
+    <Compile Include="Migrations\202005081547064_Initial.Designer.cs">
+      <DependentUpon>202005081547064_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -275,6 +272,7 @@
     <Content Include="Areas\Admin\dist\js\pages\dashboard.js" />
     <Content Include="Areas\Admin\dist\js\pages\dashboard2.js" />
     <Content Include="Areas\Admin\dist\js\pages\dashboard3.js" />
+    <Content Include="Areas\Admin\dist\js\slug.js" />
     <Content Include="Areas\Admin\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Areas\Admin\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Areas\Admin\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -2215,6 +2213,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\AdminBase\" />
+    <Folder Include="Areas\Admin\Views\Slug\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
@@ -2319,11 +2318,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004291623566_Initial.resx">
-      <DependentUpon>202004291623566_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005071611465_ProfilePhoto.resx">
-      <DependentUpon>202005071611465_ProfilePhoto.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005081547064_Initial.resx">
+      <DependentUpon>202005081547064_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

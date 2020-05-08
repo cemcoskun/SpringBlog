@@ -114,11 +114,5 @@ namespace SpringBlog.Areas.Admin.Controllers
             TempData["SuccessMessage"] = "Post has been deleted successfully.";
             return RedirectToAction("Index");
         }
-
-        [HttpPost]
-        public string ConvertToSlug(string title)
-        {
-            return UrlService.URLFriendly(title);
-        }
     }
 }

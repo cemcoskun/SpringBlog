@@ -20,7 +20,7 @@ namespace SpringBlog.Models
         public string Content { get; set; }
         public string PhotoPath { get; set; }
         [Required]
-        [MaxLength(200)]
+        [StringLength(200)]
         public string Slug { get; set; }
         [Required]
         public DateTime? CreationTime { get; set; }

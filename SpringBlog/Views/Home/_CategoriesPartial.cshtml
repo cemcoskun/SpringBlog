@@ -1,12 +1,12 @@
 ﻿@model List<Category>
 <ul class="list-unstyled mb-0">
     <li>
-        @Html.ActionLink("All Posts", "Index", "Home")
+        @Html.RouteLink("All", "HomeDefault")
     </li>
     @foreach (var cat in Model)
     {
         <li>
-            <a href="@Url.Action("Index", "Home", new { cid = cat.Id })">
+            <a href="@Url.Action("Index", "Home", new { cid = cat.Id, slug = cat.Slug })">
                 @cat.CategoryName
             </a>
         </li>

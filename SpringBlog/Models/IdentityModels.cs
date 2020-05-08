@@ -20,6 +20,7 @@ namespace SpringBlog.Models
             return userIdentity;
         }
 
+        [Required]
         [MaxLength(30)]
         public string DisplayName { get; set; }
         [MaxLength(100)]

@@ -60,7 +60,7 @@
     </div>
 
     @Html.PagedListPager(Model.Posts, page => Url.Action("Index",
-        new { page, cid = Model.CategoryId, q = Model.SearchTerm }), new PagedListRenderOptionsBase
+        new { page, q = Model.SearchTerm }), new PagedListRenderOptionsBase
             {
                 ContainerDivClasses = new string[] { "pagination-container", "d-flex" },
             UlElementClasses = new string[] { "pagination", "mx-auto" },

@@ -13,6 +13,7 @@ namespace SpringBlog.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         CategoryName = c.String(nullable: false, maxLength: 30),
+                        Slug = c.String(nullable: false, maxLength: 30),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -41,7 +42,8 @@ namespace SpringBlog.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        DisplayName = c.String(maxLength: 30),
+                        DisplayName = c.String(nullable: false, maxLength: 30),
+                        ProfilePhoto = c.String(maxLength: 100),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
