@@ -49,7 +49,7 @@
                         <div class="custom-file">
                             <label class="custom-file-label justify-content-start" for="exampleInputFile">
                                 @(string.IsNullOrEmpty(Model.CurrentFeaturedImage) ? "Choose file" : Model.CurrentFeaturedImage)
-                            </label>                            
+                            </label>
                             <input type="file" name="FeaturedImage" class="custom-file-input" id="exampleInputFile">
                         </div>
                     </div>
@@ -84,31 +84,6 @@
 
 @section scripts {
     <script>
-        $(function () {
-            var currentFeaturedImage = $("#CurrentFeaturedImage").val();
-            if ($("#CurrentFeaturedImage").val()) {
-                $("#currentFeaturedImageLabel").text(currentFeaturedImage);
-            }
-            $("#Title").change(function () {
-                if (!$("#Slug").val()) {
-                    generateSlug();
-                    }
-            });
-
-            $("#refreshSlug").click(function (event) {
-                event.preventDefault();
-                generateSlug();
-            });
-
-            function generateSlug() {
-                var title = $("#Title").val();
-                if (!title) return;
-
-                $.post("@Url.Action("ConvertToSlug")", { title: title }, function (data) {
-                    $("#Slug").val(data);
-                    $("#Slug").trigger("blur");
-                });
-            }
-        });
+        slug.run("#Title", "#Slug", "#refreshSlug");
     </script>
 }

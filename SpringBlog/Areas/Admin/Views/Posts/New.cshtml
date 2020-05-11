@@ -40,7 +40,7 @@
                             <input type="file" name="FeaturedImage" class="custom-file-input" id="exampleInputFile">
                         </div>
                     </div>
-                            @Html.ValidationMessage("FeaturedImage", null, new { @class = "text-danger ml-2" })
+                    @Html.ValidationMessage("FeaturedImage", null, new { @class = "text-danger ml-2" })
                 </div>
                 <div class="col-md-6 form-inline align-content-start my-1">
                     @Html.LabelFor(x => x.Slug)
@@ -65,27 +65,6 @@
 
 @section scripts {
     <script>
-        $(function () {
-            $("#Title").change(function () {
-                if (!$("#Slug").val()) {
-                    generateSlug();
-                    }
-            });
-
-            $("#refreshSlug").click(function (event) {
-                event.preventDefault();
-                generateSlug();
-            });
-
-            function generateSlug() {
-                var title = $("#Title").val();
-                if (!title) return;
-
-                $.post("@Url.Action("ConvertToSlug")", { title: title }, function (data) {
-                    $("#Slug").val(data);
-                    $("#Slug").trigger("blur");
-                });
-            }
-        });
+        slug.run("#Title", "#Slug", "#refreshSlug");
     </script>
 }

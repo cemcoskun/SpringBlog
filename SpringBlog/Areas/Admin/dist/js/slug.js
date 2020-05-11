@@ -7,11 +7,15 @@
     };
 
     this.run = function (sourceSelector, targetSelector, refreshSelector) {
-        this.generateSlug = function () {
+
+        var _ajaxUrl = this.ajaxUrl;
+
+        function generateSlug() {
+            console.log(_ajaxUrl);
             var title = $(sourceSelector).val();
             if (!title) return;
 
-            $.post(this.ajaxUrl, { title: title }, function (data) {
+            $.post(_ajaxUrl, { title: title }, function (data) {
                 $(targetSelector).val(data);
                 $(targetSelector).trigger("blur"); // in order to trigger validation
             });
@@ -27,8 +31,6 @@
             event.preventDefault();
             generateSlug();
         });
-
-        
 
     };
 }
