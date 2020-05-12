@@ -79,6 +79,10 @@ namespace SpringBlog.Models
         [Display(Name = "Parolayı onaylayın")]
         [Compare("Password", ErrorMessage = "Parola ve onay parolası aynı değil.")]
         public string ConfirmPassword { get; set; }
+        [Required]
+        [StringLength(30)]
+        [Display(Name = "Display Name")]
+        public string DisplayName { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -1,4 +1,6 @@
 ﻿$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+
     bsCustomFileInput.init();
 
     $("#frmSearch").submit(function (event) {

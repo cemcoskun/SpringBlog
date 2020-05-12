@@ -32,3 +32,7 @@
     padding-bottom: 55px;
     background-color: #f0f0f0;
 }
+
+input[type = "text"], input[type = "password"] {
+    max-width: 280px;
+}

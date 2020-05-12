@@ -1,6 +1,6 @@
 ﻿@model SpringBlog.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Kaydol";
+    ViewBag.Title = "Register";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -8,30 +8,39 @@
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Yeni bir hesap oluşturun.</h4>
+    <h4>Create a new account.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+    <div class="form-group row">
+        <label for="DisplayName" class="col-md-3 col-form-label">
+            @Html.DisplayNameFor(m => m.DisplayName)
+            <i class="fas fa-info-circle text-info" data-toggle="tooltip" data-placement="right" title="You'll need to create a display name if you want to do anything public on this website. For example, if you post a comment on an article. Your display name will be public."></i>
+        </label>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-3 col-form-label" })
+        <div class="col-md-6">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-3 col-form-label" })
+        <div class="col-md-6">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+    <div class="form-group row">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-3 col-form-label" })
+        <div class="col-md-6">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Kaydol" />
+    <div class="form-group row">
+        <div class="offset-md-3 col-md-6">
+            <input type="submit" class="btn btn-primary" value="Register" />
         </div>
     </div>
 }

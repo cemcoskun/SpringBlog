@@ -63,7 +63,7 @@
     </div>
 
     @foreach (var comment in Model.Post.Comments
-        .Where(x => x.State ==  CommentState.Approved && x.ParentId == null)
+        .Where(x => x.State == CommentState.Approved && x.ParentId == null)
         .OrderByDescending(x => x.CreationTime))
     {
         <!-- Single Comment -->
@@ -72,7 +72,16 @@
             <div class="media-body">
                 <h5 class="mt-0">@comment.Author.DisplayName</h5>
                 @comment.Content <br />
-                <a href="#" class="reply-button" data-comment-id="@comment.Id">Reply</a>
+
+                @if (Request.IsAuthenticated)
+                {
+                    <a href="#" class="reply-button" data-comment-id="@comment.Id">Reply</a>
+                }
+                else
+                {
+                    @Html.ActionLink("Reply", "Login", "Account", new { returnUrl = Request.Url.AbsolutePath }, null)
+                }
+
                 <div class="reply-form-wrapper"></div>
 
                 <div class="mt-1">
@@ -108,8 +117,20 @@
 
         $(".reply-button").click(function (event) {
             event.preventDefault();
+
+            // zaten tıklanmışsa kapat
+            if ($(this).next(".reply-form-wrapper").html()) {
+                $(this).next(".reply-form-wrapper").html("");
+                return;
+            }
+
             var commentId = $(this).data("comment-id");
             var frm = $("#leave-a-comment form").clone();
+
+            frm.addClass("d-flex justify-content-end")
+            frm.find(".form-group").addClass("flex-fill mb-0")
+            frm.find("button").addClass("btn-sm align-self-end ml-1")
+
             frm.find("#ParentId").val(commentId);
             $(".reply-form-wrapper").html("");
             $(this).next(".reply-form-wrapper").html(frm);
