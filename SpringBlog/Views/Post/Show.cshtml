@@ -62,46 +62,50 @@
         </div>
     </div>
 
-    @foreach (var comment in Model.Post.Comments
-        .Where(x => x.State == CommentState.Approved && x.ParentId == null)
-        .OrderByDescending(x => x.CreationTime))
-    {
-        <!-- Single Comment -->
-        <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(comment.Author.ProfilePhoto)" alt="" width="50" height="50">
-            <div class="media-body">
-                <h5 class="mt-0">@comment.Author.DisplayName</h5>
-                @comment.Content <br />
 
-                @if (Request.IsAuthenticated)
-                {
-                    <a href="#" class="reply-button" data-comment-id="@comment.Id">Reply</a>
-                }
-                else
-                {
-                    @Html.ActionLink("Reply", "Login", "Account", new { returnUrl = Request.Url.AbsolutePath }, null)
-                }
 
-                <div class="reply-form-wrapper"></div>
+    <div id="comments">
+        @foreach (var comment in Model.Post.Comments
+       .Where(x => x.State == CommentState.Approved && x.ParentId == null)
+       .OrderByDescending(x => x.CreationTime))
+        {
+            <!-- Single Comment -->
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(comment.Author.ProfilePhoto)" alt="" width="50" height="50">
+                <div class="media-body">
+                    <h5 class="mt-0">@comment.Author.DisplayName</h5>
+                    @comment.Content <br />
 
-                <div class="mt-1">
-                    @foreach (var subcomment in comment.Children
-                   .Where(x => x.State == CommentState.Approved)
-                   .OrderBy(x => x.CreationTime))
+                    @if (Request.IsAuthenticated)
                     {
-                        <!-- Single Comment -->
-                        <div class="media mb-4">
-                            <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(subcomment.Author.ProfilePhoto)" alt="" width="50" height="50">
-                            <div class="media-body">
-                                <h5 class="mt-0">@subcomment.Author.DisplayName</h5>
-                                @subcomment.Content
-                            </div>
-                        </div>
+                        <a href="#" class="reply-button" data-comment-id="@comment.Id">Reply</a>
                     }
+                    else
+                    {
+                        @Html.ActionLink("Reply", "Login", "Account", new { returnUrl = Request.Url.AbsolutePath }, null)
+                    }
+
+                    <div class="reply-form-wrapper"></div>
+
+                    <div class="mt-1">
+                        @foreach (var subcomment in comment.Children
+                       .Where(x => x.State == CommentState.Approved)
+                       .OrderBy(x => x.CreationTime))
+                        {
+                            <!-- Single Comment -->
+                            <div class="media mb-4">
+                                <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(subcomment.Author.ProfilePhoto)" alt="" width="50" height="50">
+                                <div class="media-body">
+                                    <h5 class="mt-0">@subcomment.Author.DisplayName</h5>
+                                    @subcomment.Content
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 
 
 
@@ -113,7 +117,12 @@
             if (location.hash == "#leave-a-comment") {
                 window.scrollTo(0, $("#leave-a-comment").offset().top - 65);
             }
-        }, 100);
+        }, 50);
+        setTimeout(function () {
+            if (location.hash == "#comments") {
+                window.scrollTo(0, $("#comments").offset().top - 65);
+            }
+        }, 50);
 
         $(".reply-button").click(function (event) {
             event.preventDefault();
