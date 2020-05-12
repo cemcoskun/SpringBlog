@@ -1,0 +1,11 @@
+﻿@model CommentViewModel
+
+<form action="@Url.Action("Show")#leave-a-comment" method="post">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ParentId)
+
+    <div class="form-group">
+        <textarea name="Content" class="form-control" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

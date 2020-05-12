@@ -197,6 +197,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Enums\CommentState.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -208,15 +209,22 @@
     <Compile Include="Migrations\202005081547064_Initial.Designer.cs">
       <DependentUpon>202005081547064_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005111436482_Comments.cs" />
+    <Compile Include="Migrations\202005111436482_Comments.Designer.cs">
+      <DependentUpon>202005111436482_Comments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CommentViewModel.cs" />
     <Compile Include="ViewModel\HomeIndexViewModel.cs" />
+    <Compile Include="ViewModel\ShowPostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\dist\css\adminlte.css" />
@@ -2208,6 +2216,7 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="Views\Shared\_CommentFormPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2320,6 +2329,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202005081547064_Initial.resx">
       <DependentUpon>202005081547064_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005111436482_Comments.resx">
+      <DependentUpon>202005111436482_Comments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

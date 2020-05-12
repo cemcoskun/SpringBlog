@@ -49,7 +49,6 @@
     <div class="mb-3 text-center">
         Page @(Model.Posts.PageCount < Model.Posts.PageNumber ? 0 : Model.Posts.PageNumber) of @Model.Posts.PageCount
     </div>
-
     @Html.PagedListPager(Model.Posts, page => Url.Action("Index",
         new { page, q = Model.SearchTerm }), new PagedListRenderOptionsBase
             {

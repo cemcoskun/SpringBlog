@@ -1,14 +1,118 @@
-﻿@model Post
+﻿@*https://startbootstrap.com/templates/blog-post/*@
+@model ShowPostViewModel
 @{
-    ViewBag.Title = "Show";
+    ViewBag.Title = Model.Post.Title;
 }
 
-<h1 class="mt-1">@Model.Title</h1>
+<div>
+    <!-- Title -->
+    <h1 class="mt-1">@Model.Post.Title</h1>
 
-<div class="show-post">
-    @if (!string.IsNullOrEmpty(Model.PhotoPath))
+    <!-- Author -->
+    <p class="lead">
+        by
+        <a href="#">@Model.Post.Author.DisplayName</a>
+    </p>
+
+    <hr />
+
+    <!-- Date/Time -->
+    <p>Posted on @Model.Post.CreationTime.Value.ToLongDateString()</p>
+
+    <hr />
+
+    <!-- Preview Image -->
+    @if (!string.IsNullOrEmpty(Model.Post.PhotoPath))
     {
-        <img src="@Url.FeaturedImage(Model.PhotoPath)" class="mb-3" alt="Post Featured Image" />
+        <img src="@Url.FeaturedImage(Model.Post.PhotoPath)" alt="Post Featured Image" class="img-fluid rounded" />
+        <hr />
     }
-    @Html.Raw(Model.Content)
+
+    <!-- Post Content -->
+    @Html.Raw(Model.Post.Content)
+
+    <hr />
+
+    <!-- Comments Form -->
+    <div class="card my-4" id="leave-a-comment">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+            @if (Request.QueryString["commentSuccess"] == "True")
+            {
+                <div class="alert alert-success">
+                    Your comment has been received succesfully.
+                </div>
+            }
+
+            @if (Request.IsAuthenticated)
+            {
+                @Html.Partial("_CommentFormPartial", Model.CommentViewModel)
+            }
+            else
+            {
+                <p class="text-center mt-3">
+                    Please
+                    @Html.ActionLink("log in", "Login", "Account", new { returnUrl = Request.Url.AbsolutePath }, null)
+                    or
+                    @Html.ActionLink("register", "Register", "Account")
+                    to leave a comment.
+
+                </p>
+            }
+        </div>
+    </div>
+
+    @foreach (var comment in Model.Post.Comments
+        .Where(x => x.State ==  CommentState.Approved && x.ParentId == null)
+        .OrderByDescending(x => x.CreationTime))
+    {
+        <!-- Single Comment -->
+        <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(comment.Author.ProfilePhoto)" alt="" width="50" height="50">
+            <div class="media-body">
+                <h5 class="mt-0">@comment.Author.DisplayName</h5>
+                @comment.Content <br />
+                <a href="#" class="reply-button" data-comment-id="@comment.Id">Reply</a>
+                <div class="reply-form-wrapper"></div>
+
+                <div class="mt-1">
+                    @foreach (var subcomment in comment.Children
+                   .Where(x => x.State == CommentState.Approved)
+                   .OrderBy(x => x.CreationTime))
+                    {
+                        <!-- Single Comment -->
+                        <div class="media mb-4">
+                            <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(subcomment.Author.ProfilePhoto)" alt="" width="50" height="50">
+                            <div class="media-body">
+                                <h5 class="mt-0">@subcomment.Author.DisplayName</h5>
+                                @subcomment.Content
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+
+
 </div>
+
+@section scripts {
+    <script>
+        setTimeout(function () {
+            if (location.hash == "#leave-a-comment") {
+                window.scrollTo(0, $("#leave-a-comment").offset().top - 65);
+            }
+        }, 100);
+
+        $(".reply-button").click(function (event) {
+            event.preventDefault();
+            var commentId = $(this).data("comment-id");
+            var frm = $("#leave-a-comment form").clone();
+            frm.find("#ParentId").val(commentId);
+            $(".reply-form-wrapper").html("");
+            $(this).next(".reply-form-wrapper").html(frm);
+        });
+    </script>
+}
