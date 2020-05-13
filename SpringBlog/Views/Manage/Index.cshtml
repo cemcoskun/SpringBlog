@@ -159,7 +159,10 @@
 
                 reader.onload = function (e) {
                     if(cropper == null)
-                        cropper = $('.cropper').croppie();
+                        cropper = $('.cropper').croppie({
+                            enableOrientation: true,
+                            viewport: {width: 150, height:150, type:'square'}
+                        });
 
                     cropper.croppie('bind', {
                         url: e.target.result

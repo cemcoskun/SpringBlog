@@ -39,10 +39,11 @@
         </div>
         <div class="card-footer text-muted clearfix">
             <div class="float-right">
-                @{ var commentCount = post.Comments.Count(x => x.State == CommentState.Approved);}}
+                @{ var commentCount = post.Comments.Count(x => x.State == CommentState.Approved);}
                 <i class="fas fa-comments"></i>
-                <a href="@Url.Action("Show", "Post", new { id = post.Id, slug = post.Slug })#comments">content</a>
-                @commentCount Comment@(commentCount != 1 ? "s": ""))
+                <a href="@Url.Action("Show", "Post", new { id = post.Id, slug = post.Slug })#comments">
+                    @commentCount Comment@(commentCount != 1 ? "s" : "")
+                </a>
             </div>
             Posted on @post.CreationTime.Value.ToShortDateString() by
             <a href="#">@(post.Author.DisplayName ?? "Anonymous")</a>
