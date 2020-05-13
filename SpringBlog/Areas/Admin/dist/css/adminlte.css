@@ -13561,12 +13561,12 @@ body.text-sm .control-sidebar {
   content: "";
 }
 
-.navbar-nav > .user-menu > .dropdown-menu > .user-footer .btn-default {
+.navbar-nav > .user-menu > .dropdown-menu > .user-footer .btn-primary {
   color: #6c757d;
 }
 
 @media (min-width: 576px) {
-  .navbar-nav > .user-menu > .dropdown-menu > .user-footer .btn-default:hover {
+  .navbar-nav > .user-menu > .dropdown-menu > .user-footer .btn-primary:hover {
     background-color: #f8f9fa;
   }
 }
@@ -18620,13 +18620,13 @@ html.maximized-card {
   font-size: 0.875rem !important;
 }
 
-.btn-default {
+.btn-primary {
   background-color: #f8f9fa;
   border-color: #ddd;
   color: #444;
 }
 
-.btn-default:hover, .btn-default:active, .btn-default.hover {
+.btn-primary:hover, .btn-primary:active, .btn-primary.hover {
   background-color: #e9ecef;
   color: #2b2b2b;
 }

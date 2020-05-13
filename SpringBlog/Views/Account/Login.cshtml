@@ -38,16 +38,16 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Oturum aç" class="btn btn-default" />
+                        <input type="submit" value="Oturum aç" class="btn btn-primary" />
                     </div>
                 </div>
                 <p>
                     @Html.ActionLink("Yeni bir kullanıcı olarak kaydol", "Register")
                 </p>
-                @* Parola sıfırlama işlevi için hesap doğrulama etkinleştirildiğinde bunu etkinleştirin
-                    <p>
-                        @Html.ActionLink("Parolanızı mı unuttunuz?", "ForgotPassword")
-                    </p>*@
+                @* Parola sıfırlama işlevi için hesap doğrulama etkinleştirildiğinde bunu etkinleştirin*@
+                <p>
+                    @Html.ActionLink("Parolanızı mı unuttunuz?", "ForgotPassword")
+                </p>
             }
         </section>
     </div>

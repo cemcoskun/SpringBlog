@@ -1,3 +1,4 @@
+using SpringBlog.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace SpringBlog
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            IdentityHelpers.SeedRolesAndUsers();
         }
     }
 }

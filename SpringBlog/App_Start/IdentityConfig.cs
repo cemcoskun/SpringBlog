@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using SpringBlog.Helpers;
 using SpringBlog.Models;
 
 namespace SpringBlog
@@ -19,7 +20,7 @@ namespace SpringBlog
         public Task SendAsync(IdentityMessage message)
         {
             // E-posta göndermek için e-posta hizmetinizi buraya bağlayın.
-            return Task.FromResult(0);
+            return EmailUtilities.SendEmailAsync(message.Destination, message.Subject, message.Body);
         }
     }
 
