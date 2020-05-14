@@ -413,6 +413,7 @@
     <Content Include="Areas\Admin\plugins\ekko-lightbox\ekko-lightbox.js" />
     <Content Include="Areas\Admin\plugins\ekko-lightbox\ekko-lightbox.min.js" />
     <Content Include="Areas\Admin\plugins\fastclick\fastclick.js" />
+    <Content Include="AppSettingsSecrets.config" />
     <None Include="Areas\Admin\plugins\filterizr\filterizr.min.js" />
     <None Include="Areas\Admin\plugins\filterizr\jquery.filterizr.min.js" />
     <None Include="Areas\Admin\plugins\filterizr\vanilla.filterizr.min.js" />
